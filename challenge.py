@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+# import plotly.express as px
 import random
 import time
 
@@ -43,7 +43,6 @@ st.sidebar.write("🌱 **Stay motivated & track your progress!**")
 # 🚀 UI
 st.title(f"🌱 Welcome {st.session_state.user if st.session_state.user else ''} to the Growth Mindset Challenge App")
 st.write("Current Theme:", st.session_state.theme)
-# st.sidebar.success("✅ Theme applied successfully!")
 
 
 # 🔐 User Authentication
@@ -101,6 +100,17 @@ if st.session_state.theme == "dark":
                 background-color: #555;
                 border: 1px solid #888;
             }
+            /* Reflection Journal Background Fix */
+            .stTextArea>div {
+                background-color: #1E1E1E !important;
+                color: white !important;
+            }
+            /* Leaderboard Chart Fix */
+            .stDataFrame { 
+                background-color: #2C2F33 !important;
+                color: white !important;
+            }    
+
         </style>
         """,
         unsafe_allow_html=True
@@ -137,7 +147,7 @@ if st.button("Save Reflection"):
     else:
         st.warning("⚠️ Please log in and write something before saving.")
 
-# 📊 Progress Tracker with Streak System
+
 st.subheader("📊 Your Progress")
 if st.session_state.user:
     user_data = st.session_state.users[st.session_state.user]
@@ -161,7 +171,7 @@ else:
 
 
 # 🏆 Leaderboard (Interactive Chart)
-st.header("🏆 Leaderboard")
+st.header("🏅 Your Performance")
 if st.session_state.leaderboard:
     sorted_leaderboard = sorted(st.session_state.leaderboard.items(), key=lambda x: x[1], reverse=True)
     st.write(" Your Performance")
@@ -170,17 +180,16 @@ if st.session_state.leaderboard:
 else:
     st.warning("⚠️ No leaderboard data yet. Start completing challenges!")
 
-# Dummy Data (Replace with actual user scores)
+# Dummy Data 
 data = {
-    "User": ["Areeba", "Ali", "Fatima", "Hassan", "Sara"],
+    "User": ["Amna", "Ali", "Fatima", "Hassan", "Sara"],
     "Challenges Completed": [10, 8, 6, 5, 4]
 }
 df = pd.DataFrame(data)
+# 🏆 Display Leaderboard Table
+st.header("🏆Leaderboard")
+st.write(df)  
 
-fig = px.bar(df, x="Challenges Completed", y="User", orientation="h",
-             title="🏅 Top Performers", color="Challenges Completed",
-             color_continuous_scale="Blues")
-st.plotly_chart(fig, use_container_width=True)
 
 # 🧠 Mind Games Section
 st.sidebar.header("🧩 Mind Games")
