@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+# import plotly.express as px
 import random
 import time
 
@@ -80,11 +81,22 @@ if st.session_state.theme == "dark":
     st.markdown(
         """
         <style>
+        /* Set text color to white */
+                body, .stTextInput, .stRadio, .stSelectbox, .stMultiselect, .stMarkdown {
+                color: white !important;
+                 background-color: #121212;
+
+            }
             body, .stApp {
                 background-color: #121212;
                 color: white;
             }
-            .stSidebar, .stTextInput>div>div>input, .stTextArea>div>textarea {
+            .stSidebar, .stTextInput>div>div>input{
+                background-color: #1E1E1E;
+                color: white;
+                border: 1px solid #555;
+            }
+            .stTextArea>div>div>textarea {
                 background-color: #1E1E1E;
                 color: white;
                 border: 1px solid #555;
@@ -99,17 +111,13 @@ if st.session_state.theme == "dark":
                 background-color: #555;
                 border: 1px solid #888;
             }
-            /* Reflection Journal Background Fix */
-            .stTextArea>div {
-                background-color: #1E1E1E !important;
-                color: white !important;
+        
+            /* Dark Mode for Streamlit DataFrame */
+            div[data-testid="stDataFrame"] {
+            background-color: #2C2F33 ;
+            color: white ;
+            border: 1px solid #ffffff;
             }
-            /* Leaderboard Chart Fix */
-            .stDataFrame { 
-                background-color: #2C2F33 !important;
-                color: white !important;
-            }    
-
         </style>
         """,
         unsafe_allow_html=True
